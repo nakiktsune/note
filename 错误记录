@@ -1,0 +1,22 @@
+from selenium import webdriver
+import time
+URL="https://www.bilibili.com"
+def start(driver):
+    driver.get(URL)
+    time.sleep(1)
+    # driver.find_element_by_link_text("动画").click()
+    # time.sleep(3)
+    driver.find_element_by_class_name("nav-search-keyword").send_keys("犬夜叉")
+    driver.find_element_by_class_name("nav-search-btn").click()
+
+
+if __name__ == "__main__":
+    driver = webdriver.Chrome("./chromedriver.exe")
+    start(driver)
+    driver.close
+    
+    
+    
+问题：查找页面输入框，定位元素运行脚本报错提示：selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+原因：因为屏幕未设置为最大化，driver.maximize_window()
+然后b站做了界面自适应，导致元素不一样，被hidden住了
